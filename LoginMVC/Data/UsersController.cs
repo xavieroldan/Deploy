@@ -62,7 +62,7 @@ namespace LoginMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Pass")] User user)
+        public async Task<IActionResult> Create([Bind("ID,Name,Pass,Role")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace LoginMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Pass")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Pass,Role")] User user)
         {
             if (id != user.ID)
             {

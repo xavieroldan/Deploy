@@ -27,14 +27,16 @@ namespace LoginMVC.Models
                     new User
                     {
                         Name = "Lolo" ,
-                        Pass = "1234"
+                        Pass = "1234",
+                        Role ="user"
                         
                     },
 
                     new User
                     {
                         Name = "Xavi",
-                        Pass = "4567"
+                        Pass = "4567",
+                        Role = "admin"
 
                     },
 
@@ -48,7 +50,8 @@ namespace LoginMVC.Models
                     new User
                     {
                         Name = "user",
-                        Pass = "user"
+                        Pass = "user",
+                        Role = "test"
                     }
                 );
                 context.SaveChanges();
