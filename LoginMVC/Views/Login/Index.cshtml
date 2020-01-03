@@ -1,7 +1,27 @@
-﻿@{
+﻿@model LoginMVC.Models.User
+
+@{
     ViewData["Title"] = " My Login";
 }
 
-<h2>Login</h2>
+<h2 class="text-important">Login</h2>
 
-<p>Hello from Login!</p>
+<div class="text-center">
+    <div class="login-page">
+        <div class="form">
+            @*<form class="register-form" >
+                    <input type="text" placeholder="name" />
+                    <input type="password" placeholder="password" />
+                    <input type="text" placeholder="email address" />
+                    <button>create</button>
+                    <p class="message">Already registered? <a href="#">Sign In</a></p>
+                </form>*@
+            <form class="login-form" asp-controller="Login" asp-action="CheckUser">
+                <input type="text" name="User" placeholder="user" />
+                <input input type="password" name="Password" autocomplete="off" placeholder="password" />
+                <button type="submit" value="Submit">login</button>
+                @*<p class="message">Not registered? <a href="#">Create an account</a></p>*@
+            </form>
+        </div>
+    </div>
+</div>
