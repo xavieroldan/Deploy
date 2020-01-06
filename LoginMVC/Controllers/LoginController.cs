@@ -7,14 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 using LoginMVC.Models;
 using LoginMVC.Data;
 using Microsoft.EntityFrameworkCore;
+using LoginMVC.Contexts;
 
 namespace LoginMVC.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly LoginMVCContext _context;
+        private readonly UserMySQLContext _context;
 
-        public LoginController(LoginMVCContext context)
+        public LoginController(UserMySQLContext context)
         {
             _context = context;
         }

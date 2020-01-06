@@ -20,7 +20,6 @@ namespace LoginMVC
         public static void Main(string[] args)
         {
             InsertData();
-            PrintData();
             CreateHostBuilder(args).Build().Run();
 
             static void InsertData()
@@ -45,49 +44,7 @@ namespace LoginMVC
                         context.SaveChanges();
                     }
                 }
-            }
-
-            static void PrintData()
-            {
-                // Gets and prints all in database
-                using (var context = new UserMySQLContext())
-                {
-                    var users = context.User;
-
-                    if (context.User.Any())
-                    {
-                        foreach (var user in users)
-                        {
-                            var data = new StringBuilder();
-                            data.AppendLine($"Name: {user.Name} ");
-                            data.AppendLine($"Password: {user.Pass} ");
-                            data.AppendLine($"Role: {user.Role}");
-                            Console.WriteLine(data.ToString());
-                        }
-                    }
-                    else { Console.WriteLine("Data not found in DB"); }
-                }
-
-                
-                //var host = CreateHostBuilder(args).Build().Run();
-
-                //using (var scope = host.Services.CreateScope())
-                //{
-                //    var services = scope.ServiceProvider;
-
-                //    try
-                //    {
-                //        //SeedData.Initialize(services);
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        var logger = services.GetRequiredService<ILogger<Program>>();
-                //        logger.LogError(ex, "An error occurred seeding the DB.");
-                //    }
-                //}
-
-                //host.Run();
-            }
+            }            
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

@@ -164,4 +164,3 @@ C:\Users\Lenovo10\source\repos\Deploy\LoginMVC\obj\Debug\netcoreapp3.1\LoginMVC.
 C:\Users\Lenovo10\source\repos\Deploy\LoginMVC\obj\Debug\netcoreapp3.1\LoginMVC.csproj.CopyComplete
 C:\Users\Lenovo10\source\repos\Deploy\LoginMVC\obj\Debug\netcoreapp3.1\LoginMVC.dll
 C:\Users\Lenovo10\source\repos\Deploy\LoginMVC\obj\Debug\netcoreapp3.1\LoginMVC.pdb
-C:\Users\Lenovo10\source\repos\Deploy\LoginMVC\obj\Debug\netcoreapp3.1\LoginMVC.csprojAssemblyReference.cache
