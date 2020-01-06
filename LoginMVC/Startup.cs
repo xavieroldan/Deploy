@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LoginMVC.Contexts;
 using LoginMVC.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +11,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MySql.Data.MySqlClient;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Pomelo.EntityFrameworkCore.MySql.Storage;
 
 namespace LoginMVC
 {
@@ -25,10 +29,21 @@ namespace LoginMVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews(); 
-            services.AddDbContext<LoginMVCContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("LoginMVCContext")));
+            services.AddControllersWithViews();
+
             services.AddMvc(option => option.EnableEndpointRouting = false);
+
+            //SQL Lite 
+            //services.AddDbContext<LoginMVCContext>(options =>
+            //options.UseSqlServer(Configuration.GetConnectionString("LoginMVCContext")));
+
+            //MySQL 
+            services.AddDbContext<UserMySQLContext>(options =>
+          options.UseMySql(Configuration.GetConnectionString("DefaultConnection"))
+          );
+
+            services.AddMvc();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

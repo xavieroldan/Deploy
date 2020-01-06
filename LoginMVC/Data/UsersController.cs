@@ -7,14 +7,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LoginMVC.Data;
 using LoginMVC.Models;
+using LoginMVC.Contexts;
 
 namespace LoginMVC.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly LoginMVCContext _context;
+        private readonly UserMySQLContext _context;
 
-        public UsersController(LoginMVCContext context)
+        public UsersController(UserMySQLContext context)
         {
             _context = context;
         }
@@ -62,7 +63,7 @@ namespace LoginMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Pass")] User user)
+        public async Task<IActionResult> Create([Bind("ID,Name,Pass,Role")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +95,7 @@ namespace LoginMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Pass")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Pass,Role")] User user)
         {
             if (id != user.ID)
             {

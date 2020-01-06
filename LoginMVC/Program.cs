@@ -9,6 +9,9 @@ using Microsoft.Extensions.Logging;
 using LoginMVC.Data;
 using LoginMVC.Models;
 using Microsoft.Extensions.DependencyInjection;
+using LoginMVC.Contexts;
+using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace LoginMVC
 {
@@ -16,24 +19,75 @@ namespace LoginMVC
     {
         public static void Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
+            InsertData();
+            PrintData();
+            CreateHostBuilder(args).Build().Run();
 
-            using (var scope = host.Services.CreateScope())
+            static void InsertData()
             {
-                var services = scope.ServiceProvider;
+                using (var context = new UserMySQLContext())
+                {
+                    // Creates the database if not exists
+                    if (!context.User.Any())
+                    {
+                        context.Database.EnsureCreated();
 
-                try
-                {
-                    SeedData.Initialize(services);
-                }
-                catch (Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred seeding the DB.");
+                        // Adds an element
+                        var user = new User
+                        {
+                            Name = "Lolo",
+                            Pass = "1234",
+                            Role = "user"
+                        };
+                        context.User.Add(user);
+
+                        // Saves changes
+                        context.SaveChanges();
+                    }
                 }
             }
 
-            host.Run();
+            static void PrintData()
+            {
+                // Gets and prints all in database
+                using (var context = new UserMySQLContext())
+                {
+                    var users = context.User;
+
+                    if (context.User.Any())
+                    {
+                        foreach (var user in users)
+                        {
+                            var data = new StringBuilder();
+                            data.AppendLine($"Name: {user.Name} ");
+                            data.AppendLine($"Password: {user.Pass} ");
+                            data.AppendLine($"Role: {user.Role}");
+                            Console.WriteLine(data.ToString());
+                        }
+                    }
+                    else { Console.WriteLine("Data not found in DB"); }
+                }
+
+                
+                //var host = CreateHostBuilder(args).Build().Run();
+
+                //using (var scope = host.Services.CreateScope())
+                //{
+                //    var services = scope.ServiceProvider;
+
+                //    try
+                //    {
+                //        //SeedData.Initialize(services);
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        var logger = services.GetRequiredService<ILogger<Program>>();
+                //        logger.LogError(ex, "An error occurred seeding the DB.");
+                //    }
+                //}
+
+                //host.Run();
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

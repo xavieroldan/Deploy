@@ -22,5 +22,7 @@ namespace LoginMVC.Models
 
             set { this._pass = Tools.PasswordHelper.Base64Encode(value, this.Name); }
         }
+
+        public string Role { get; set; }
     }
 }
